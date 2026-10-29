@@ -1,86 +1,137 @@
-// TBY DEVELOPMENT — WEBSITE CONFIGURATION
+// ========================================
+// TBY Development — Website JavaScript
+// ========================================
 
 const config = {
     discordInvite: "https://discord.gg/kYXvCTU2us",
-    quoteEmail: ""
+    quoteAPI: "https://tby-quote-api.20kait-xs.workers.dev"
 };
 
-// DISCORD NAVIGATION
+// ========================================
+// Discord Links
+// ========================================
 
-const discordLink = document.getElementById("discord-link");
+document.addEventListener("DOMContentLoaded", () => {
 
-if (discordLink) {
-    discordLink.addEventListener("click", function(event) {
-        event.preventDefault();
+    const discordLink = document.getElementById("discord-link");
+    const generalSupport = document.getElementById("general-support");
+    const purchaseSupport = document.getElementById("purchase-support");
 
-        window.open(
-            config.discordInvite,
-            "_blank",
-            "noopener,noreferrer"
-        );
+    const discordButtons = [
+        discordLink,
+        generalSupport,
+        purchaseSupport
+    ];
+
+    discordButtons.forEach(button => {
+        if (!button) return;
+
+        button.href = config.discordInvite;
+        button.target = "_blank";
+        button.rel = "noopener noreferrer";
     });
-}
 
-// SUPPORT BUTTONS
+    // ========================================
+    // Custom Quote Form
+    // ========================================
 
-const generalSupport = document.getElementById("general-support");
-const purchaseSupport = document.getElementById("purchase-support");
+    const quoteForm = document.getElementById("quote-form");
 
-function openSupport(event) {
-    event.preventDefault();
+    if (!quoteForm) return;
 
-    window.open(
-        config.discordInvite,
-        "_blank",
-        "noopener,noreferrer"
-    );
-}
+    const submitButton = quoteForm.querySelector('button[type="submit"]');
 
-if (generalSupport) {
-    generalSupport.addEventListener("click", openSupport);
-}
+    // Create a message area below the submit button
+    const statusMessage = document.createElement("p");
 
-if (purchaseSupport) {
-    purchaseSupport.addEventListener("click", openSupport);
-}
+    statusMessage.id = "quote-status";
+    statusMessage.setAttribute("role", "status");
+    statusMessage.setAttribute("aria-live", "polite");
+    statusMessage.style.marginTop = "15px";
+    statusMessage.style.fontSize = "14px";
 
-// CUSTOM DEVELOPMENT QUOTE FORM
+    quoteForm.appendChild(statusMessage);
 
-const quoteForm = document.getElementById("quote-form");
+    let submitting = false;
 
-if (quoteForm) {
-    quoteForm.addEventListener("submit", function(event) {
+    quoteForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        if (!config.quoteEmail) {
-            alert("Custom quote submissions are not available yet.");
+        if (submitting) return;
+
+        const discord = document.getElementById("discord")?.value.trim() || "";
+        const email = document.getElementById("email")?.value.trim() || "";
+        const project = document.getElementById("project")?.value || "";
+        const budget = document.getElementById("budget")?.value || "";
+        const description = document.getElementById("description")?.value.trim() || "";
+        const references = document.getElementById("references")?.value.trim() || "";
+
+        // Validate required fields
+        if (!discord || !project || !budget || !description) {
+            statusMessage.textContent = "Please complete all required fields.";
+            statusMessage.style.color = "#FF7777";
             return;
         }
 
-        const discord = document.getElementById("discord").value;
-        const email = document.getElementById("email").value;
-        const project = document.getElementById("project").value;
-        const budget = document.getElementById("budget").value;
-        const description = document.getElementById("description").value;
-        const references = document.getElementById("references").value;
+        submitting = true;
 
-        const subject = "TBY Development - Custom Quote Request";
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = "Submitting...";
+        }
 
-        const body = `
-Discord Username: ${discord}
-Email: ${email}
-Project Type: ${project}
-Budget: ${budget}
+        statusMessage.textContent = "Sending your request...";
+        statusMessage.style.color = "#91A4B3";
 
-Project Description:
-${description}
+        try {
+            const response = await fetch(config.quoteAPI, {
+                method: "POST",
 
-Reference Links:
-${references}
-        `;
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-        const mailto = `mailto:${config.quoteEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                body: JSON.stringify({
+                    discord,
+                    email,
+                    project,
+                    budget,
+                    description,
+                    references
+                })
+            });
 
-        window.location.href = mailto;
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error(
+                    result.message || "Unable to submit your request."
+                );
+            }
+
+            // Success
+            statusMessage.textContent =
+                "Your request has been submitted! Our team will contact you on Discord.";
+
+            statusMessage.style.color = "#55DCE8";
+
+            quoteForm.reset();
+
+        } catch (error) {
+            console.error("Quote submission failed:", error);
+
+            statusMessage.textContent =
+                "Your request could not be submitted. Please try again later.";
+
+            statusMessage.style.color = "#FF7777";
+
+        } finally {
+            submitting = false;
+
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = "Submit Request";
+            }
+        }
     });
-}
+});

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse FiveM scripts and request custom development from TBY Development.">
+    <title>Store | TBY Development</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .store-header {
+            padding: 85px 10% 35px;
+        }
+
+        .store-header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            margin: 12px 0;
+        }
+
+        .store-header p,
+        .quote-description {
+            color: var(--muted);
+            max-width: 600px;
+        }
+
+        .quote-form {
+            max-width: 700px;
+            margin-top: 30px;
+            padding: 30px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            color: var(--white);
+            font-family: inherit;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--cyan);
+        }
+
+        .form-group textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .form-note {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .store-header {
+                padding: 60px 6% 20px;
+            }
+
+            .store-header h1 {
+                font-size: 36px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .quote-form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+        <a href="index.html" class="logo">TBY<span>.</span></a>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="store.html" class="active">Store</a>
+            <a href="support.html">Support</a>
+            <a href="#" id="discord-link">Discord ↗</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- STORE HEADER -->
+        <section class="store-header">
+            <span class="label">TBY / STORE</span>
+            <h1>Our Resources</h1>
+            <p>
+                Explore our FiveM resources and discover what's coming next.
+            </p>
+        </section>
+
+        <!-- RESOURCE CARDS -->
+        <section class="section">
+            <div class="resource-grid">
+
+                <div class="resource-card">
+                    <div class="resource-image">COMING SOON</div>
+                    <div class="resource-info">
+                        <h3>New Resource</h3>
+                        <p>Details will be available soon.</p>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-image">COMING SOON</div>
+                    <div class="resource-info">
+                        <h3>New Resource</h3>
+                        <p>Details will be available soon.</p>
+                    </div>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-image">COMING SOON</div>
+                    <div class="resource-info">
+                        <h3>New Resource</h3>
+                        <p>Details will be available soon.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CUSTOM DEVELOPMENT QUOTE -->
+        <section class="section" id="quote">
+
+            <span class="label">CUSTOM DEVELOPMENT</span>
+            <h2 class="section-title">Get a Quote</h2>
+
+            <p class="quote-description">
+                Have an idea for your FiveM server?
+                Tell us what you're looking for and request a custom quote.
+            </p>
+
+            <form class="quote-form" id="quote-form">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="discord">Discord Username *</label>
+                        <input type="text" id="discord" name="discord"
+                               placeholder="yourusername" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address (Optional)</label>
+                        <input type="email" id="email" name="email"
+                               placeholder="you@example.com">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="project">Project Type *</label>
+                        <select id="project" name="project" required>
+                            <option value="">Select a project type</option>
+                            <option>Custom Script</option>
+                            <option>Script Modification</option>
+                            <option>UI Development</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Budget *</label>
+                        <select id="budget" name="budget" required>
+                            <option value="">Select your budget</option>
+                            <option>Under $25</option>
+                            <option>$25 - $50</option>
+                            <option>$50 - $100</option>
+                            <option>$100 - $250</option>
+                            <option>$250+</option>
+                            <option>Not Sure Yet</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Project Description *</label>
+                    <textarea id="description" name="description"
+                              placeholder="Describe what you'd like us to create..."
+                              required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="references">Reference Links (Optional)</label>
+                    <input type="text" id="references" name="references"
+                           placeholder="Links to examples or inspiration">
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Submit Request ↗
+                </button>
+
+                <p class="form-note">
+                    We'll review your request and contact you to discuss
+                    the details and pricing.
+                </p>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <span>© 2026 TBY Development. All rights reserved.</span>
+        <span>FiveM Resources & Custom Development</span>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

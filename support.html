@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Support | TBY Development</title>
+
+    <meta name="description" content="Get support for TBY Development FiveM resources and purchases.">
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .support-header {
+            padding: 90px 10% 45px;
+        }
+
+        .support-header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            margin: 12px 0;
+        }
+
+        .support-header p {
+            color: var(--muted);
+            max-width: 550px;
+        }
+
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .support-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 35px;
+            transition: border-color 0.2s ease;
+        }
+
+        .support-card:hover {
+            border-color: var(--cyan-dark);
+        }
+
+        .support-card h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            margin: 15px 0;
+        }
+
+        .support-card p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .support-header {
+                padding: 60px 6% 25px;
+            }
+
+            .support-header h1 {
+                font-size: 36px;
+            }
+
+            .support-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+
+        <a href="index.html" class="logo">
+            TBY<span>.</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="store.html">Store</a>
+            <a href="support.html" class="active">Support</a>
+            <a href="#" id="discord-link">Discord ↗</a>
+        </nav>
+
+    </header>
+
+    <main>
+
+        <!-- SUPPORT HEADER -->
+        <section class="support-header">
+
+            <span class="label">TBY / SUPPORT</span>
+
+            <h1>How Can We Help?</h1>
+
+            <p>
+                Need assistance? We're here to help with
+                questions, purchases, and technical issues.
+            </p>
+
+        </section>
+
+        <!-- SUPPORT OPTIONS -->
+        <section class="section">
+
+            <div class="support-grid">
+
+                <!-- GENERAL SUPPORT -->
+                <div class="support-card">
+
+                    <span class="label">01 / GENERAL</span>
+
+                    <h2>General Support</h2>
+
+                    <p>
+                        Need help installing a script, reporting a bug,
+                        or have a general question?
+                    </p>
+
+                    <a href="#" class="btn btn-primary" id="general-support">
+                        Get Support ↗
+                    </a>
+
+                </div>
+
+                <!-- PURCHASE SUPPORT -->
+                <div class="support-card">
+
+                    <span class="label">02 / PURCHASES</span>
+
+                    <h2>Purchase Support</h2>
+
+                    <p>
+                        Questions about payments, orders,
+                        downloads, or purchasing resources?
+                    </p>
+
+                    <a href="#" class="btn btn-primary" id="purchase-support">
+                        Get Support ↗
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+
+        <span>© 2026 TBY Development. All rights reserved.</span>
+
+        <span>FiveM Resources & Custom Development</span>
+
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
